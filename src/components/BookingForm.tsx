@@ -89,7 +89,7 @@ export default function BookingForm({
 
       setTimeout(() => {
         window.location.reload();
-      }, 8000);
+      }, 15000);
 
     } catch (error) {
       console.error(error);
