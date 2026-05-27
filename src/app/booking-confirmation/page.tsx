@@ -1,72 +1,145 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import {
+  Suspense
+} from "react";
 
-export default function BookingConfirmationPage() {
-  const searchParams = useSearchParams();
+import {
+  useSearchParams
+} from "next/navigation";
+
+function BookingConfirmationContent() {
+
+  const searchParams =
+    useSearchParams();
+
+  const reference =
+    searchParams.get("reference");
+
+  const flight =
+    searchParams.get("flight");
+
+  const name =
+    searchParams.get("name");
+
+  const email =
+    searchParams.get("email");
+
+  const origin =
+    searchParams.get("origin");
+
+  const destination =
+    searchParams.get(
+      "destination"
+    );
+
+  const departure =
+    searchParams.get(
+      "departure"
+    );
+
+  const arrival =
+    searchParams.get(
+      "arrival"
+    );
+
+  const price =
+    searchParams.get("price");
 
   return (
     <main className="min-h-screen bg-slate-100 p-10">
-      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-10 border border-green-200">
+
+      <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-lg border border-green-200 p-10">
 
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold text-green-700">
+
+          <h1 className="text-5xl font-black text-green-700">
             Booking Confirmed
           </h1>
 
-          <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+          <span className="bg-green-600 text-white px-5 py-2 rounded-full font-semibold">
             E-Ticket
           </span>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 text-slate-700">
+        <div className="grid md:grid-cols-2 gap-10 text-slate-700">
 
-          <div className="space-y-4">
+          <div className="space-y-5">
+
             <p>
-              <strong>Reference:</strong>{" "}
-              {searchParams.get("reference")}
+              <strong>
+                Reference:
+              </strong>{" "}
+              {reference}
             </p>
 
             <p>
-              <strong>Passenger:</strong>{" "}
-              {searchParams.get("name")}
+              <strong>
+                Passenger:
+              </strong>{" "}
+              {name}
             </p>
 
             <p>
-              <strong>Email:</strong>{" "}
-              {searchParams.get("email")}
+              <strong>
+                Email:
+              </strong>{" "}
+              {email}
             </p>
 
             <p>
-              <strong>Flight:</strong>{" "}
-              {searchParams.get("flight")}
+              <strong>
+                Flight:
+              </strong>{" "}
+              {flight}
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-5">
+
             <p>
-              <strong>Route:</strong>{" "}
-              {searchParams.get("origin")} →{" "}
-              {searchParams.get("destination")}
+              <strong>
+                Route:
+              </strong>{" "}
+              {origin} →{" "}
+              {destination}
             </p>
 
             <p>
-              <strong>Departure:</strong>{" "}
-              {searchParams.get("departure")}
+              <strong>
+                Departure:
+              </strong>{" "}
+              {departure}
             </p>
 
             <p>
-              <strong>Arrival:</strong>{" "}
-              {searchParams.get("arrival")}
+              <strong>
+                Arrival:
+              </strong>{" "}
+              {arrival}
             </p>
 
-            <p className="text-3xl font-bold text-slate-900">
-              ${searchParams.get("price")}
+            <p className="text-4xl font-black text-slate-900">
+              ${price}
             </p>
           </div>
-
         </div>
       </div>
     </main>
+  );
+}
+
+export default function BookingConfirmationPage() {
+
+  return (
+    <Suspense
+      fallback={
+        <div className="p-10">
+          Loading...
+        </div>
+      }
+    >
+      <BookingConfirmationContent />
+    </Suspense>
   );
 }
